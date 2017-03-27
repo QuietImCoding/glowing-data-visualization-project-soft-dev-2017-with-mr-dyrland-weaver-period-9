@@ -10,7 +10,7 @@ var setup = function() {
     height = svg.node().getBoundingClientRect().height;
     d3.selectAll(".label").each(function(d, i) {
 	var x = width/2 + ((i > 0) * -5) + ((i==0) * 5);;
-	var y = height/2 + ((i > 0) * -50) + ((i==0) * 50);
+	var y = height/2 + ((i > 0) * -50) + ((i==0) * 80);
 	d3.select(this)
 	    .attr("x", x)
 	    .attr("y", y)
