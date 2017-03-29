@@ -22,6 +22,26 @@ var setup = function() {
     year = 400;
     width = svg.node().getBoundingClientRect().width;
     height = svg.node().getBoundingClientRect().height;
+
+    var slices = svg.select("#slices").selectAll("path");
+    console.log(slices);
+    var lastangle = 0;
+    var cx = 5*width/6;
+    var cy = 3*height/4;
+    var radius = Math.min(width/4, height/4)/2;
+    var lastslice = [cx, cy-radius];
+    slices.data([10, 20, 30, 40]).enter().append("path").attr("d", function(d, i) {
+	var angle = (360 * (d/100))
+	var pathstr = "M "+ lastslice[0] + " " + lastslice[1] + " ";
+	var endx = cx+(radius*(Math.cos(toRadians(lastangle+angle-90))));
+	var endy = cy+(radius*(Math.sin(toRadians(lastangle+angle-90))));
+	pathstr += "A " + radius + " " + radius + " " + 1 + " " + (d > 180)*1 + " " + 1 + " " + endx + " " + endy;
+	pathstr += " L " + cx + " " + cy;
+	lastslice = [endx, endy];
+	lastangle += angle;
+	return pathstr;
+    }).attr("fill", function(d) {return "hsl(" + Math.floor(360 * Math.random(d)) + ", 80%, 60%)"}).attr("stroke", "black").attr("count", function(d, i){return i;});
+    
     d3.selectAll(".label").each(function(d, i) {
 	var x = width/2 + ((i > 0) * -5) + ((i==0) * 5);;
 	var y = height/2 + ((i > 0) * -50) + ((i==0) * 80);
@@ -34,6 +54,10 @@ var setup = function() {
     });
 };
 
+function toRadians (angle) {
+    return angle * (Math.PI / 180);
+}
+
 var sizeBars = function() {
     var females = svg.select("#females").selectAll("rect");
     thisData = [data[year]["Black or African American.Employment-Population Ratio.Women"], data[year]["White.Employment-Population Ratio.Women"]]
@@ -44,8 +68,6 @@ var sizeBars = function() {
     }
     females.data(thisData).enter();
     females.transition().attr("width", function(d, i) {
-	console.log(d);
-	console.log(i);
 	return parseFloat(d)/2 + "%";
     });
     var males = svg.select("#males").selectAll("rect");
