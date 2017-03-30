@@ -23,43 +23,14 @@ var setup = function() {
     width = svg.node().getBoundingClientRect().width;
     height = svg.node().getBoundingClientRect().height;
 
-    var slices = svg.select("#inslices").selectAll("path");
-    console.log(slices);
-    var lastangle = 0;
-    var cx = 5*width/6;
-    var cy = 3*height/4;
     var radius = Math.min(width/4, height/4)/2;
-    var lastslice = [cx, cy-radius];
-    slices.data([10, 20, 30, 40]).enter().append("path").attr("d", function(d, i) {
-	var angle = (360 * (d/100))
-	var pathstr = "M "+ lastslice[0] + " " + lastslice[1] + " ";
-	var endx = cx+(radius*(Math.cos(toRadians(lastangle+angle-90))));
-	var endy = cy+(radius*(Math.sin(toRadians(lastangle+angle-90))));
-	pathstr += "A " + radius + " " + radius + " " + 1 + " " + (d > 180)*1 + " " + 1 + " " + endx + " " + endy;
-	pathstr += " L " + cx + " " + cy;
-	lastslice = [endx, endy];
-	lastangle += angle;
-	return pathstr;
-    }).attr("fill", function(d) {return "hsl(" + Math.floor(360 * Math.random()) + ", 80%, 60%)"}).attr("stroke", "black").attr("count", function(d, i){return i;});
-
-    var slices = svg.select("#outslices").selectAll("path");
-    console.log(slices);
-    var lastangle = 0;
     var cx = 5*width/6;
     var cy = 3*height/4;
-    var radius = Math.min(width/3, height/3)/2;
-    var lastslice = [cx, cy-radius];
-    slices.data([10, 10, 10, 10, 10, 10, 10, 10, 10, 10]).enter().append("path").attr("d", function(d, i) {
-	var angle = (360 * (d/100))
-	var pathstr = "M "+ lastslice[0] + " " + lastslice[1] + " ";
-	var endx = cx+(radius*(Math.cos(toRadians(lastangle+angle-90))));
-	var endy = cy+(radius*(Math.sin(toRadians(lastangle+angle-90))));
-	pathstr += "A " + radius + " " + radius + " " + 1 + " " + (d > 180)*1 + " " + 1 + " " + endx + " " + endy;
-	pathstr += " L " + cx + " " + cy;
-	lastslice = [endx, endy];
-	lastangle += angle;
-	return pathstr;
-    }).attr("fill", function(d) {return "hsl(" + Math.floor(360 * Math.random()) + ", 80%, 60%)"}).attr("stroke", "black").attr("count", function(d, i){return i;});
+    var slices = svg.select("#inslices").selectAll("path");
+    pichart(slices, [100/3, 100/3, 100/3],cx ,cy , radius);
+    radius *= 1.5;
+    slices = svg.select("#outslices").selectAll("path");
+    pichart(slices, [100/9, 100/9, 100/9, 100/9, 100/9, 100/9, 100/9, 100/9, 100/9], cx, cy, radius*1.5 );
 
     svg.select("#inslices").selectAll("circle").data([radius/2]).enter().append("circle").attr("cx", cx).attr("cy", cy).attr("r", function(d) {return d;}).attr("fill", "#51B1FF").attr("stroke", "#000000");
 
