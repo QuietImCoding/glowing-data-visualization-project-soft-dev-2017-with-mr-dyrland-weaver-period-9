@@ -7,12 +7,13 @@ var pichart = function(slices,data,cx, cy, radius, radii) {
 	var endy = cy+(radius*(Math.sin(toRadians(lastangle+angle-90))));
 	var pathstr = "M "+ lastslice[0] + " " + lastslice[1] + " ";
 	pathstr += "A " + radius + " " + radius + " " + 1 + " " + (d > 180)*1 + " " + 1 + " " + endx + " " + endy;
-	console.log(radii[i]);
-	pathstr += " L " + (cx+((radius+radii[i])*(Math.cos(toRadians(lastangle+angle-90))))) + " " + (cy+((radius+radii[i])*(Math.sin(toRadians(lastangle+angle-90)))));;
+	lastslice = [endx, endy];
+	endx = (cx+((radius+radii[i])*(Math.cos(toRadians(lastangle+angle-90)))));
+	endy = (cy+((radius+radii[i])*(Math.sin(toRadians(lastangle+angle-90)))));
+	pathstr += " L " + endx + " " + endy;
 	endx = cx+((radius+radii[i])*(Math.cos(toRadians(lastangle-90))));
 	endy = cy+((radius+radii[i])*(Math.sin(toRadians(lastangle-90))));
 	pathstr += "A " + (radius+radii[i]) + " " + (radius+radii[i]) + " " + 1 + " " + (d > 180)*1 + " " + 0 + " " + endx + " " + endy;
-	lastslice = [endx, endy];
 	lastangle += angle;
 	return pathstr;
     }).attr("fill", function(d) {return "hsl(" + Math.floor(360 * Math.random()) + ", 80%, 60%)"}).attr("stroke", "black").attr("count", function(d, i){return i;});

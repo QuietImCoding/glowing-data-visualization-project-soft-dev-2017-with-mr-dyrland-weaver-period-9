@@ -14,10 +14,21 @@ var setup = function() {
     var cy = height/2;
     var slices = svg.select("#outslices").selectAll("path");
     data = [];
-    for (i = 0; i < 10; i++) { data.push(100/3); }
-    var radii = [];
-    for (i = 0; i < 3; i++) { radii.push(30); }
+    radii = [];
+    radii2 = [];
+    var parts = 10
+    for (i = 0; i < parts; i++) {
+	data.push(100/parts); 
+	radii.push(radius/8);
+	radii2.push(10 * i + 10);
+    }
+    pichart(slices, data, cx, cy, radius/3+(radius/8), radii2);
     slices = svg.select("#inslices").selectAll("path");
+    parts = 20;
+    for (i = 0; i < parts; i++) {
+	data.push(100/parts); 
+	radii.push(radius/8);
+    }
     pichart(slices, data, cx, cy, radius/3, radii);
 }
 
