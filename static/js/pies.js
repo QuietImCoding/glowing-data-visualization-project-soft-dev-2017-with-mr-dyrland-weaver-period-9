@@ -14,13 +14,11 @@ var setup = function() {
     var cy = height/2;
     var slices = svg.select("#outslices").selectAll("path");
     data = [];
-    for (i = 0; i < 36; i++) { data.push(100/36); }
-    pichart(slices,data,cx ,cy , radius/1.2);
-    data = [];
-    for (i = 0; i < 3; i++) { data.push(100/3); }
+    for (i = 0; i < 10; i++) { data.push(100/3); }
+    var radii = [];
+    for (i = 0; i < 3; i++) { radii.push(30); }
     slices = svg.select("#inslices").selectAll("path");
-    pichart(slices, data, cx, cy, radius/2);
-    svg.select("#inslices").selectAll("circle").data([radius/4]).enter().append("circle").attr("cx", cx).attr("cy", cy).attr("r", function(d) {return d;}).attr("fill", "#FFFFFF").attr("stroke", "#000000");
+    pichart(slices, data, cx, cy, radius/3, radii);
 }
 
 function toRadians (angle) {
