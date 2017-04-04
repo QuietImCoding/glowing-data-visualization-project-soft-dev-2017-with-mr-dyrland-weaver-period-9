@@ -1,7 +1,14 @@
-var pichart = function(slices,data,cx, cy, radius, radii) {
+var pichart = function(slices,data,cx, cy, radius, radii, color) {
+    if (!color) {
+	color = "hsl(" + (Math.floor(Math.random()*360)) + ", 80%, 80%)";
+    }
     var lastangle = 0;
     var lastslice = [cx, cy-radius];
-    slices.data(data).enter().append("path").attr("d", function(d, i) {
+    slices = slices.data(data);
+    if (slices.size() == 0) {
+	slices = slices.enter().append("path");
+    }
+    slices/*data(data).enter().append("path")..transition()*/.attr("d", function(d, i) {
 	var angle = (360 * (d/100));
 	var endx = cx+(radius*(Math.cos(toRadians(lastangle+angle-90))));
 	var endy = cy+(radius*(Math.sin(toRadians(lastangle+angle-90))));
@@ -16,5 +23,10 @@ var pichart = function(slices,data,cx, cy, radius, radii) {
 	pathstr += "A " + (radius+radii[i]) + " " + (radius+radii[i]) + " " + 1 + " " + (d > 180)*1 + " " + 0 + " " + endx + " " + endy;
 	lastangle += angle;
 	return pathstr;
-    }).attr("fill", function(d) {return "hsl(" + Math.floor(360 * Math.random()) + ", 80%, 60%)"}).attr("stroke", "black").attr("count", function(d, i){return i;});
+    }).attr("fill", color).attr("stroke", "black").attr("count", function(d, i){return i;}).attr("fill-opacity", function(d, i) {
+	return (i+1) / data.length;
+    });
 };
+
+
+    
