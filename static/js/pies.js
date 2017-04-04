@@ -40,7 +40,7 @@ var setup = function() {
     pichart(slices, data, cx, cy, radius/3+radius/4, outradii, "#FC6471");
 
     svg.on("mousemove", function(d) {
-	var newradius = dist(d3.event.clientX, d3.event.clientY, width/2, height/2)/2-outradii.shift();;
+	var newradius = dist(d3.event.clientX, d3.event.clientY, width/2, height/2)/4-outradii.shift();;
 	outradii.push(newradius);
 
 	slices = svg.select("#outslices").selectAll("path");
