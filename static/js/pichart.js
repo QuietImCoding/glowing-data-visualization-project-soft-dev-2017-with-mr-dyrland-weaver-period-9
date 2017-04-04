@@ -8,7 +8,7 @@ var pichart = function(slices,data,cx, cy, radius, radii, color) {
     if (slices.size() == 0) {
 	slices = slices.enter().append("path");
     }
-    slices/*data(data).enter().append("path")..transition()*/.attr("d", function(d, i) {
+    slices.transition().duration(100).attr("d", function(d, i) {
 	var angle = (360 * (d/100));
 	var endx = cx+(radius*(Math.cos(toRadians(lastangle+angle-90))));
 	var endy = cy+(radius*(Math.sin(toRadians(lastangle+angle-90))));
