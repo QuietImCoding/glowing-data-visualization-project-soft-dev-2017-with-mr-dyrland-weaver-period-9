@@ -9,9 +9,14 @@ var pichart = function(slices,data,cx, cy, radius, radii, color) {
 	slices = slices.enter().append("path");
     }
     slices.transition().duration(100).attr("d", function(d, i) {
-	var angle = (360 * (d/100));
-	var endx = cx+(radius*(Math.cos(toRadians(lastangle+angle-90))));
-	var endy = cy+(radius*(Math.sin(toRadians(lastangle+angle-90))));
+	var angle = (360 * (Math.abs(d)/100));
+	var endx = cx+(Math.abs(radius)*(Math.cos(toRadians(lastangle+angle-90))));
+	var endy = cy+(Math.abs(radius)*(Math.sin(toRadians(lastangle+angle-90))));
+	if (d < 0) {
+	    lastslice = [endx, endy];
+	    lastangle += angle;
+	    return "";
+	}
 	var pathstr = "M "+ lastslice[0] + " " + lastslice[1] + " ";
 	pathstr += "A " + radius + " " + radius + " " + 1 + " " + (d > 180)*1 + " " + 1 + " " + endx + " " + endy;
 	lastslice = [endx, endy];

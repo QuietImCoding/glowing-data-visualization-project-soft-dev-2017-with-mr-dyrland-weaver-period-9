@@ -24,14 +24,20 @@ var setup = function() {
 	radii.push(radius/8);
     }
     pichart(slices, data, cx, cy, radius/3, radii, "#64FFDA");
+    
+    slices = svg.select("#midslices").selectAll("path");
+    data = [];
+    var radii3 = [];
+    var parts = 12;
+    for (i = 0; i < parts; i++) {
+	data.push((100/parts)*pORm()); 
+	radii3.push(radius/8);
+    }
+    pichart(slices, data, cx, cy, radius/3+(radius/8), radii3);
+    
     data = [];
     slices = svg.select("#outslices").selectAll("path");
-    parts = 16
-    for (i = 0; i < parts; i++) {
-	data.push(100/parts); 
-	radii2.push(((i%3)+1)*(radius/8));
-    }
-    pichart(slices, data, cx, cy, radius/3+(radius/8), outradii, "#FC6471");
+    pichart(slices, data, cx, cy, radius/3+radius/4, outradii, "#FC6471");
 
     svg.on("mousemove", function(d) {
 	var newradius = dist(d3.event.clientX, d3.event.clientY, width/2, height/2)/2-outradii.shift();;
@@ -40,12 +46,14 @@ var setup = function() {
 	slices = svg.select("#outslices").selectAll("path");
 	var data = []
 	for (i = 0; i < outradii.length; i++) {
-	    data.push(100/outradii.length);
+	    data.push(100/outradii.length * pORm());
 	}
-	pichart(slices, data, cx, cy, radius/3+(radius/8), outradii, "#FC6471");	
+	pichart(slices, data, cx, cy, radius/3+(radius/4), outradii, "#FC6471");	
     });
 
 }
+
+var pORm = function() { if (Math.random() > 0.5) { return 1; } else { return -1; } }
 
 var dist = function(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2-x1, 2)+Math.pow(y2-y1, 2));
