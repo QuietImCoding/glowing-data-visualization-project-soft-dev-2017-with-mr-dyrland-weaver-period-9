@@ -1,6 +1,7 @@
 var svg, data;
 var width, height;
 var cx, cy, radius;
+var widths = [];
 
 var getPiesForYear = function(year) {
 
@@ -27,7 +28,7 @@ var getPiesForYear = function(year) {
     var wtotal = white.reduce(function (a, b) { return parseInt(a) + parseInt(b); });
     var total = btotal + wtotal + atotal;
 
-    var widths = [];
+    widths = [];
     widths.push(btotal/total*100);
     widths.push(wtotal/total*100);
     widths.push(atotal/total*100);
@@ -37,21 +38,25 @@ var getPiesForYear = function(year) {
     radii.push(radius/8);
     radii.push(radius/8);
 
-    console.log(widths);
-    console.log(radii);
+    /*console.log(widths);
+    console.log(radii);*/
     
     var slices = svg.select("#inslices").selectAll("path");
 
-    //pichart(slices, widths, cx, cy, radius/3, radii, "#64FFDA");
-
+    pichart(slices, widths, cx, cy, radius/3, radii, "#64FFDA");
+    widths = [];
+    radii=[];
     racelengths = [btotal, wtotal, atotal];
     for (i = 0; i < racelengths.length; i++) {
-	console.log("AHAHAHAHHA");
-	for (j = 0; j < 12; i++) {
-	    widths.push(racelengths[i]/12);
+	
+	for (j = 0; j < 12; j++) {
+	    console.log(racelengths[i]);
+	    widths.push((racelengths[i]/total)*100/12);
+	    radii.push(radius/8);
 	}
     }
-    console.log("AHHH: " + widths);
+    pichart(slices, widths, cx, cy, radius/3+(radius/8), radii);
+
 }
 
 var setup = function() {
@@ -70,7 +75,7 @@ var setup = function() {
     cx = width/2;
     cy = height/2;
     
-    slices = svg.select("#midslices").selectAll("path");
+   /* slices = svg.select("#midslices").selectAll("path");
     var radii3 = []
     data = [];
     var parts = 3;
