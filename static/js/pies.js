@@ -5,9 +5,6 @@ var widths = [];
 
 var getPiesForYear = function(year) {
 
-    console.log(cx);
-    console.log(cy);
-    console.log(radius);
     var black = [];
     var asian = [];
     var white = [];
@@ -37,13 +34,10 @@ var getPiesForYear = function(year) {
     radii.push(radius/8);
     radii.push(radius/8);
     radii.push(radius/8);
-
-    /*console.log(widths);
-    console.log(radii);*/
     
     var slices = svg.select("#inslices").selectAll("path");
-
     pichart(slices, widths, cx, cy, radius/3, radii, "#64FFDA");
+
     widths = [];
     radii=[];
     racelengths = [btotal, wtotal, atotal];
@@ -55,6 +49,7 @@ var getPiesForYear = function(year) {
 	    radii.push(radius/8);
 	}
     }
+    var slices = svg.select("#outslices").selectAll("path");
     pichart(slices, widths, cx, cy, radius/3+(radius/8), radii);
 
 }
@@ -66,7 +61,7 @@ var setup = function() {
     d3.csv("/static/csv/labor.csv", function(err, d) {
 	if (err) throw err;
 	data = d;
-	getPiesForYear(10);
+	getPiesForYear(40);
     });    
     
     width = svg.node().getBoundingClientRect().width;
