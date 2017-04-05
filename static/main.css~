@@ -1,0 +1,8 @@
+#title {
+    font-size: 5em;
+    color: white;
+}
+#subtitle {
+    font-size: 2em;
+    color: white;
+}

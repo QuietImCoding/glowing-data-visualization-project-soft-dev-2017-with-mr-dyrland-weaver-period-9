@@ -1,0 +1,11 @@
+window.onload = function() {
+    var year = document.getElementById("timeslider");
+    console.log(year);
+    function slyd() {
+	document.getElementById("yearoutput").innerHTML = year.value;
+	console.log(year.value);
+    }
+    year.oninput = function() {
+	slyd();
+    }
+}

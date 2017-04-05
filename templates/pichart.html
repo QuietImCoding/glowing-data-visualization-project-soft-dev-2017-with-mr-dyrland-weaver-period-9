@@ -4,6 +4,7 @@
     <script src="/static/js/d3-request.min.js"></script>
     <script src="/static/js/pies.js"></script>
     <script src="/static/js/pichart.js"></script>
+    <script src="/static/js/slyd.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/main.css">
 
     <title>USA Labor</title>
@@ -12,7 +13,7 @@
     <h1 class="txt" id="title">USA Labor Statistics</h1>
     <h3 class="txt" id="subtitle">from the CORGIS Dataset Project</h3>
     <div id="slider">
-      <h5 class="txt" id="year">YEAR: {{year}}<!--placeholder--></h5>
+     <output id="yearoutput"></output>
       <input id="timeslider" type="range" min="1972" max="2015" step="1" value="1972">
     </div>
     <svg id="svg" xmlns="http://www.w3.org/2000/svg">

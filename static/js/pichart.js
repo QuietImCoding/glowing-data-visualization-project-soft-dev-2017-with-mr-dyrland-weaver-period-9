@@ -32,6 +32,4 @@ var pichart = function(slices,data,cx, cy, radius, radii, color) {
 	return (i+1) / data.length;
     });
 };
-
-
     
