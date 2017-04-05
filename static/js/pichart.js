@@ -31,7 +31,11 @@ var pichart = function(slices,data,cx, cy, radius, radii, color) {
 	lastangle += angle;
 	return pathstr;
     }).attr("fill", color).attr("stroke", "black").attr("count", function(d, i){return i;}).attr("fill-opacity", function(d, i) {
-	return (i+1) / data.length;
+	if (data.length > 3) {
+	    return (i < data.length/3)*.33 + (i >= data.length/3 && i < 2 * data.length/3)*.66 + (i >= 2*data.length/3)*1;
+	} else {
+	    return (i+1) / data.length;
+	}
     });
 };
     

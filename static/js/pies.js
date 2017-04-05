@@ -44,13 +44,25 @@ var getPiesForYear = function(year) {
     for (i = 0; i < racelengths.length; i++) {
 	
 	for (j = 0; j < 12; j++) {
-	    console.log(racelengths[i]);
 	    widths.push((racelengths[i]/total)*100/12);
-	    radii.push(radius/8);
+	    var percentEmployed;
+	    if (i==0) {
+		percentEmployed = parseFloat(data[(year*12)+j]["Black or African American.Employment-Population Ratio.All"])/100;
+	    } else if (i==1) {
+		percentEmployed = parseFloat(data[(year*12)+j]["White.Employment-Population Ratio.All"])/100;
+	    } else if (i==2) {
+		console.log(parseFloat(data[(year*12)+j]["Employed.Asian.Unemployment Rate"]));
+		if (parseFloat(data[(year*12)+j]["Employed.Asian.Unemployment Rate"]) != 0) {
+		    percentEmployed = (100 - parseFloat(data[(year*12)+j]["Employed.Asian.Unemployment Rate"]))/100;
+		} else {
+		    percentEmployed = 0;
+		}
+	    }
+	    radii.push((radius/4) * Math.abs(percentEmployed-0.25)*4);
 	}
     }
     var slices = svg.select("#outslices").selectAll("path");
-    pichart(slices, widths, cx, cy, radius/3+(radius/8), radii);
+    pichart(slices, widths, cx, cy, radius/3+(radius/8), radii, "#FC6471");
 
 }
 
@@ -85,7 +97,7 @@ var setup = function() {
     pichart(slices, data, cx, cy, radius/3+(radius/8), radii3);
     
     /*slices = svg.select("#outslices").selectAll("path");
-    pichart(slices, data, cx, cy, radius/3+radius/4, outradii, "#FC6471");*/
+    pichart(slices, data, cx, cy, radius/3+radius/4, outradii, );*/
 
 };
 
