@@ -1,7 +1,9 @@
+#t-wrap {
+    position: absolute;
+}
 .txt {
     font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
     color: white;
-    position: absolute;
 }
 #slider {
     position: absolute;

@@ -10,13 +10,21 @@
     <title>USA Labor</title>
   </head>
   <body>
-    <h1 class="txt" id="title">USA Labor Statistics</h1>
-    <h3 class="txt" id="subtitle">from the CORGIS Dataset Project</h3>
-    <p class="txt" style="color:white; font-size:1em; position: absolute; top:12%;">
-      Inner circle: Race<br>
-      Outer circle radius: Percent employed<br>
-      Direction: Black, White, Asian (clockwise)
-     </p>
+
+    <div id="t-wrap">
+      <p style="line-height: 100%;">
+	<span class="txt" id="subtitle" style="position:relative;top:0.125em;">from the CORGIS Dataset Project</span>
+	<br>
+	<span class="txt" id="title" style="position:relative;top:0.35em;">USA Labor Statistics</span>
+	<br>
+	<span class="txt" style="font-size:1em;position:relative;top:2em;">
+	  Inner circle: Race<br>
+	  Outer circle radius: Percent employed<br>
+	  Direction: Black, White, Asian (clockwise)
+	</span>
+      </p>      
+    </div>
+    
     <div id="slider">
       <h5 id="yeardisplay">Drag me!</h5>
       <input id="timeslider" oninput="slyd(this.value)" type="range" min="1972" max="2015" step="1" value="1972">
