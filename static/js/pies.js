@@ -1,84 +1,92 @@
 var svg, data;
 var width, height;
-var outradii = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var cx, cy, radius;
+
+var getPiesForYear = function(year) {
+
+    console.log(cx);
+    console.log(cy);
+    console.log(radius);
+    var black = [];
+    var asian = [];
+    var white = [];
+
+    var i = year*12;
+    while (i < (year * 12) + 12) {
+	var b = data[i]["Civilian Labor Force.Black or African American.Counts.All"];
+	if (!isNaN(b)) { black.push(b); };
+	var a = data[i]["Civilian Labor Force.Asian.Counts"];
+	if (!isNaN(b)) { asian.push(a); };
+	var w = data[i]["Civilian Labor Force.White.Counts.All"];
+	if (!isNaN(b)) { white.push(w); };
+	i += 1;
+    }
+    
+    var btotal = black.reduce(function (a, b) { return parseInt(a) + parseInt(b); });
+    var atotal = asian.reduce(function (a, b) { return parseInt(a) + parseInt(b); });
+    var wtotal = white.reduce(function (a, b) { return parseInt(a) + parseInt(b); });
+    var total = btotal + wtotal + atotal;
+
+    var widths = [];
+    widths.push(btotal/total*100);
+    widths.push(wtotal/total*100);
+    widths.push(atotal/total*100);
+
+    var radii = []; 
+    radii.push(radius/8);
+    radii.push(radius/8);
+    radii.push(radius/8);
+
+    console.log(widths);
+    console.log(radii);
+    
+    var slices = svg.select("#inslices").selectAll("path");
+
+    //pichart(slices, widths, cx, cy, radius/3, radii, "#64FFDA");
+
+    racelengths = [btotal, wtotal, atotal];
+    for (i = 0; i < racelengths.length; i++) {
+	console.log("AHAHAHAHHA");
+	for (j = 0; j < 12; i++) {
+	    widths.push(racelengths[i]/12);
+	}
+    }
+    console.log("AHHH: " + widths);
+}
 
 var setup = function() {
     svg = d3.select("#svg");
 
 
-    var black = [];
-    var asian = [];
-    var white = [];
-
     d3.csv("/static/csv/labor.csv", function(err, d) {
 	if (err) throw err;
 	data = d;
-	
-	var i = 28*12;
-	while (i < data.length) {
-	    var b = data[i]["Civilian Labor Force.Black or African American.Counts.All"];
-	    if (!isNaN(b)) { black.push(b); };
-	    var a = data[i]["Civilian Labor Force.Asian.Counts"];
-	    if (!isNaN(b)) { asian.push(a); };
-	    var w = data[i]["Civilian Labor Force.White.Counts.All"];
-	    if (!isNaN(b)) { white.push(w); };
-	    i += 1;
-	}
-    
+	getPiesForYear(10);
+    });    
     
     width = svg.node().getBoundingClientRect().width;
     height = svg.node().getBoundingClientRect().height;
     radius = Math.min(width/2, height/2);
     cx = width/2;
     cy = height/2;
-    var slices = svg.select("#inslices").selectAll("path");
-    data = [];
-    var radii = [];
-    var radii2 = [];
-    var parts = 3;
-
-    var btotal = black.reduce(function (a, b) { return a + b; });
-    var atotal = asian.reduce(function (a, b) { return a + b; });
-    var wtotal = white.reduce(function (a, b) { return a + b; });
-    var total = btotal + wtotal + atotal;
-
-    data.push(btotal/total);
-    data.push(atotal/total);
-    data.push(wtotal/total);
- 
-    radii.push(radius/8);
-    radii.push(radius/8);
-    radii.push(radius/8);
-    
-    pichart(slices, data, cx, cy, radius/3, radii, "#64FFDA");
     
     slices = svg.select("#midslices").selectAll("path");
+    var radii3 = []
     data = [];
-    var radii3 = [];
-    var parts = 12;
-    for (i = 0; i < parts; i++) {
-	data.push((100/parts)*pORm()); 
+    var parts = 3;
+    var total = 0;
+    for (i=0; i < parts; i++)  {
+	data.push(Math.random()*(100/parts)); 
 	radii3.push(radius/8);
     }
+
+    console.log(data);
+    console.log(radii3);
     pichart(slices, data, cx, cy, radius/3+(radius/8), radii3);
     
-    data = [];
-    slices = svg.select("#outslices").selectAll("path");
-    pichart(slices, data, cx, cy, radius/3+radius/4, outradii, "#FC6471");
+    /*slices = svg.select("#outslices").selectAll("path");
+    pichart(slices, data, cx, cy, radius/3+radius/4, outradii, "#FC6471");*/
 
-    svg.on("mousemove", function(d) {
-	var newradius = dist(d3.event.clientX, d3.event.clientY, width/2, height/2)/4-outradii.shift();;
-	outradii.push(newradius);
-
-	slices = svg.select("#outslices").selectAll("path");
-	var data = []
-	for (i = 0; i < outradii.length; i++) {
-	    data.push(100/outradii.length * pORm());
-	}
-	pichart(slices, data, cx, cy, radius/3+(radius/4), outradii, "#FC6471");	
-    });
-	});
 };
 
 var pORm = function() { if (Math.random() > 0.5) { return 1; } else { return -1; } };
