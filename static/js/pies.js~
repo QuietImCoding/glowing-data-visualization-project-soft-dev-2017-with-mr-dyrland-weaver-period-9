@@ -5,28 +5,10 @@ var cx, cy, radius;
 
 var setup = function() {
     svg = d3.select("#svg");
-
-
-    var black = [];
-    var asian = [];
-    var white = [];
-
     d3.csv("/static/csv/labor.csv", function(err, d) {
 	if (err) throw err;
 	data = d;
-	
-	var i = 28*12;
-	while (i < data.length) {
-	    var b = data[i]["Civilian Labor Force.Black or African American.Counts.All"];
-	    if (!isNaN(b)) { black.push(b); };
-	    var a = data[i]["Civilian Labor Force.Asian.Counts"];
-	    if (!isNaN(b)) { asian.push(a); };
-	    var w = data[i]["Civilian Labor Force.White.Counts.All"];
-	    if (!isNaN(b)) { white.push(w); };
-	    i += 1;
-	}
-    
-    
+    });
     width = svg.node().getBoundingClientRect().width;
     height = svg.node().getBoundingClientRect().height;
     radius = Math.min(width/2, height/2);
@@ -36,21 +18,11 @@ var setup = function() {
     data = [];
     var radii = [];
     var radii2 = [];
-    var parts = 3;
-
-    var btotal = black.reduce(function (a, b) { return a + b; });
-    var atotal = asian.reduce(function (a, b) { return a + b; });
-    var wtotal = white.reduce(function (a, b) { return a + b; });
-    var total = btotal + wtotal + atotal;
-
-    data.push(btotal/total);
-    data.push(atotal/total);
-    data.push(wtotal/total);
- 
-    radii.push(radius/8);
-    radii.push(radius/8);
-    radii.push(radius/8);
-    
+    var parts = 8;
+    for (i = 0; i < parts; i++) {
+	data.push(100/parts); 
+	radii.push(radius/8);
+    }
     pichart(slices, data, cx, cy, radius/3, radii, "#64FFDA");
     
     slices = svg.select("#midslices").selectAll("path");
@@ -78,7 +50,7 @@ var setup = function() {
 	}
 	pichart(slices, data, cx, cy, radius/3+(radius/4), outradii, "#FC6471");	
     });
-	});
+
 }
 
 var pORm = function() { if (Math.random() > 0.5) { return 1; } else { return -1; } }
