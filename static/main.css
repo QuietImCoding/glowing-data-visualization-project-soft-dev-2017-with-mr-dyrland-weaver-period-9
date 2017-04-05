@@ -1,0 +1,11 @@
+#title {
+    font-size: 5em;
+    color: white;
+}
+#subtitle {
+    font-size: 1.5em;
+    color: white;
+}
+* { margin: 0; padding: 0; }
+body, html { height: 100%; }
+#svg { position: absolute; width: 100%; height: 100%; z-index: -1;}
