@@ -1,8 +1,78 @@
-xinhuixu -- 2017-03-31 16:43
-  sample entry
+Daniel -- 2017-03-27
+    Wrote initial HTML file
+    Added initial files
+
+Daniel -- 2017-03-28
+    Wrote bar chart function
+
+Sebastian -- 2017-03-28
+    Put bar chart in using manually inputted data
+
+Brian -- 2017-03-28
+    Worked on converting CSV into arrays
+
+Xinhui -- 2017-03-28
+    Added colors and reformatted bar chart
+
+All -- 2017-03-29
+    Scrap basic bar graph
+    Decide on sunburst partition
+    Put in repo a version of the sample sunburst partition
+
+Sebastian -- 2017-03-30
+    Started Flask app
+
+Brian -- 2017-03-30
+    Finished app.py
+    Started work on SVG
+
+Daniel -- 2017-03-30
+    Started work on pichart function
+    Current bug with centering of the slices
+    Worked on SVG JS
+
+Daniel -- 2017-03-31
+    Worked on SVG
+    Added slider
+
+Brian -- 2017-03-31
+    Started JS for data breakdown
+
+Sebastian -- 2017-04-01
+    Debugged pichart function
+    Pichart function still messes up based on arcs drawn
+
+Xinhui -- 2017-04-01
+    Pichart function works fine for one slice, but multiple ones are distorted.
+    Work on SVG Javascript
+
+Daniel -- 2017-04-01
+    Fix distortion issue with pichart function
   
-All -- 2017-04-03 16:26
-  attempting to build the pichart function
-  
-All -- 2017-04-04 16:53
-  revamp user interaction: redesigning the slider
+Sebastian -- 2017-04-02
+    Finish JS for data breakdown
+    Issue with NaN in JS
+
+Xinhui -- 2017-04-02
+    Fixed earlier formatting issues with SVG
+
+Daniel -- 2017-04-03
+    Completely finished pichart function
+    Started implementation of pichart function
+
+Brian -- 2017-04-03
+    Started converting CSV into correct format for pichart function
+    Attempted fixing Nan issue
+    Fixed bug in JS
+
+Sebastian -- 2017-04-03
+    Implementing pichart function
+
+All -- 2017-04-04
+    Revamp user interaction: redesigning the slider
+
+Brian -- 2017-04-04
+    Finish data conversion
+
+Xinhui -- 2017-04-04
+    Started data implementation for slider
