@@ -79,13 +79,13 @@ var setup = function() {
 	pichart(slices, data, cx, cy, radius/3+(radius/4), outradii, "#FC6471");	
     });
 	});
-}
+};
 
-var pORm = function() { if (Math.random() > 0.5) { return 1; } else { return -1; } }
+var pORm = function() { if (Math.random() > 0.5) { return 1; } else { return -1; } };
 
 var dist = function(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2-x1, 2)+Math.pow(y2-y1, 2));
-}
+};
 function toRadians (angle) {
     return angle * (Math.PI / 180);
 }
