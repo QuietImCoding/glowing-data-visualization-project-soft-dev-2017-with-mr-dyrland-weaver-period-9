@@ -18,8 +18,8 @@
 	<span class="txt" id="title" style="position:relative;top:0.35em;">USA Labor Statistics</span>
 	<br>
 	<span class="txt" style="font-size:1em;position:relative;top:2em;">
-	  Inner circle: Proportion of each race's employed population to total employed population<br>
-	  Outer circle: Total employed people of race by month for selected year<br>
+	  Inner circle: Race<br>
+	  Outer circle radius: Percent employed<br>
 	  Direction: Black, White, Asian (clockwise)
 	</span>
       </p>      
